@@ -24,6 +24,57 @@ def deserialize_and_verify_json_response(response):
     """
 
     if response.status_code != 200:
-        raise ApiException(response.message, status_code=response.status_code)
+        raise ApiException(response.text, status_code=response.status_code)
 
     return json.loads(response.text)
+
+
+class ConditionValidator:
+    """
+    Condition validator
+    """
+    def __init__(self, obj):
+        self.object = obj
+
+    def validate(self, operator, field_id, value):
+        return getattr(self, str(operator))(field_id, value)
+
+    def eq(self, field_id, value):
+        """
+        Operator - equal
+        """
+        return self.object.__getattribute__(field_id) == value
+
+    def gt(self, field_id, value):
+        """
+        Operator - greater than
+        """
+        return self.object.__getattribute__(field_id) > value
+
+    def gte(self, field_id, value):
+        """
+        Operator - Greater than or equal
+        """
+        return self.object.__getattribute__(field_id) >= value
+
+    def lt(self, field_id, value):
+        """
+        Operator - Lower than
+        """
+        return self.object.__getattribute__(field_id) < value
+
+    def lte(self, field_id, value):
+        """
+        Operator - Lower than or equal
+        """
+        return self.object.__getattribute__(field_id) <= value
+
+
+def get_cop_exchange_rate():
+    """
+    Returns the current day TRM
+    :return: float, the day trm
+    """
+    # TODO: There aren't free libraries that supports exchange rates conversion for COP, so the value set is a fixed
+    #  value of the date 05/03/2021
+    return 3804.95

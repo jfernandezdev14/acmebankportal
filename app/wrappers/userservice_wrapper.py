@@ -6,7 +6,6 @@ from app.utilities.decorators.decorators import handle_api_exceptions
 from app.utilities.utils.utils import deserialize_and_verify_json_response
 
 
-@handle_api_exceptions()
 def validate_user_wrapper(user_id, pin):
     """
     Calls the endpoint to validate the user authentication data

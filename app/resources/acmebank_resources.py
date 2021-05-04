@@ -23,14 +23,10 @@ class AcmeBankProcessJsonResource(Resource):
         """
         if "json_file" in request.files:
 
-            json_file = request.files['json_file']
-            filename = secure_filename(json_file.filename)
-            json_file.save(os.path.join('./uploaded_jsons', filename))
-            with open('./uploaded_jsons/' + filename) as stored_json_file:
-                data = json.load(stored_json_file)
-                acmebank_controller = AcmeBankController(json_data=data)
-                process_response = acmebank_controller.process_json()
-
+            json_file = request.files['json_file'].read()
+            data = json.loads(json_file)
+            acmebank_controller = AcmeBankController(json_data=data)
+            process_response = acmebank_controller.process_json()
             return process_response
 
         return redirect('/')
