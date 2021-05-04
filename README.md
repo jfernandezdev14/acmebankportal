@@ -32,7 +32,7 @@ This repository depends on the following one:
      docker-compose up -d
 
    ## 4 - Test endpoints via postman (Optional):
-   If you want to test the endpoints of financialservice or userservice repos you can load the following postman collection links
+   If you want to test the endpoints of financialservice or userservice repos you can import the following postman collection links
    
    - FinancialService postman collection: https://www.getpostman.com/collections/fa7bb4dbe2d2c61961d7
    - UserService postman collection: https://www.getpostman.com/collections/2f7339a01e1f4bb62cb4
